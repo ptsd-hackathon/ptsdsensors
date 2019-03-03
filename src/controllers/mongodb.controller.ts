@@ -4,6 +4,9 @@ import { Observable, of, from } from 'rxjs';
 
 import { IPersonStatistics } from '@models/statistics.model';
 import { IWatchStatisticsSample } from '@models/watch.model';
+const url = 'mongodb://localhost:27017';
+const dbName = 'myproject';
+
 const defaultJson: IPersonStatistics = {
   userId: '',
   count: 0,
@@ -25,8 +28,6 @@ const defaultJson: IPersonStatistics = {
 };
 
 export function createNewUser(newUserId: String) {
-  const url = 'mongodb://localhost:27017';
-  const dbName = 'myproject';
 
   MongoClient.connect(url, function(err, client) {
     const db: Db = client.db(dbName);
@@ -43,8 +44,6 @@ export function createNewUser(newUserId: String) {
 export function initDB() {}
 export function updatePersonAvg(watchSample: IWatchStatisticsSample) {
   console.log('update person');
-  const url = 'mongodb://localhost:27017';
-  const dbName = 'myproject';
 
   MongoClient.connect(url, function(err, client) {
     const db: Db = client.db(dbName);
@@ -94,8 +93,6 @@ export function updatePersonAvg(watchSample: IWatchStatisticsSample) {
 }
 
 export function getUsers(): Observable<{ userId: string }[]> {
-  const url = 'mongodb://localhost:27017';
-  const dbName = 'myproject';
 
   return Observable.create(observer => {
     MongoClient.connect(url, function(err, client) {
@@ -116,7 +113,21 @@ export function getUsers(): Observable<{ userId: string }[]> {
 export function getProfileStatistics(
   userId: string
 ): Observable<IPersonStatistics> {
-  return of(defaultJson);
+  
+  return Observable.create(observer => {
+    MongoClient.connect(url, function(err, client) {
+      const db: Db = client.db(dbName);
+      const collection = db.collection('documents');
+      collection
+        .find({'userId': userId})
+        .toArray()
+        .then(users => {
+          observer.next(users);
+          client.close();
+        });
+    });
+  });
+  //return of(defaultJson);
 }
 
 const runFunctionOnDb = function(operation: (db: Db, f) => any) {
