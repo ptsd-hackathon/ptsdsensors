@@ -1,4 +1,5 @@
 export interface IWatchStatisticsSample {
+    userId: string;
     date: Date;
     calories: number;
     respiratoryRate: number;
@@ -11,6 +12,7 @@ export interface IWatchStatisticsSample {
     strokeVolume: number;
     cardiacOutput: number;
     cardiacIndex: number;
-    svrTemperature: number;
+    svr: number;
+    temperature: number;
     sweat: number;
 }

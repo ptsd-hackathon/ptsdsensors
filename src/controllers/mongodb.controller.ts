@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 
 import { IPersonStatistics } from '@models/statistics.model';
 import { IWatchStatisticsSample } from '@models/watch.model';
-//JSON.stringify(object)
 const defaultJson: IPersonStatistics = {
     userId: "",
     count: 1,
@@ -21,27 +20,12 @@ const defaultJson: IPersonStatistics = {
     strokeVolume: { min: 0, max: 10, average: 5, lastSample: 7 },
     cardiacOutput: { min: 0, max: 10, average: 5, lastSample: 7 },
     cardiacIndex: { min: 0, max: 10, average: 5, lastSample: 7 },
-    svrTemperature: { min: 0, max: 10, average: 5, lastSample: 7 },
+    svr: { min: 0, max: 10, average: 5, lastSample: 7 },
+    temperature: { min: 0, max: 10, average: 5, lastSample: 7 },
     sweat: { min: 0, max: 10, average: 5, lastSample: 7 }
 }
 
 
-const defaultWatch: IWatchStatisticsSample = {
-    date: new Date(),
-    calories:  9 ,
-    respiratoryRate:  9 ,
-    spO2:  9 ,
-    heartRate:  9 ,
-    hrVariability:  9 ,
-    systolicBP:  9 ,
-    diastolicBP:   9 ,
-    pulsePressure:  9 ,
-    strokeVolume:  9 ,
-    cardiacOutput:  9,
-    cardiacIndex:  9,
-    svrTemperature:  9 ,
-    sweat:   9 
-}
 
 export function createNewUser(newUserId: String) {
      const url = 'mongodb://localhost:27017';
@@ -69,7 +53,7 @@ export function createNewUser(newUserId: String) {
 
 export function initDB() {
 }
-export function updatePersonAvg(watchSample: IWatchStatisticsSample, userId: String) {
+export function updatePersonAvg(watchSample: IWatchStatisticsSample) {
     const url = 'mongodb://localhost:27017';
      const dbName = 'myproject';
 
@@ -79,7 +63,7 @@ export function updatePersonAvg(watchSample: IWatchStatisticsSample, userId: Str
         const collection = db.collection('documents');
         
         // Find some documents
-        collection.find({'userId': userId}).toArray((err, docs: IPersonStatistics[]) => {
+        collection.find({'userId': watchSample.userId}).toArray((err, docs: IPersonStatistics[]) => {
             const statDocument: IPersonStatistics = docs[0];
             const newDoc = {...statDocument};
 
@@ -93,22 +77,22 @@ export function updatePersonAvg(watchSample: IWatchStatisticsSample, userId: Str
             newDoc.count = statDocument.count+1;
             newDoc.lastSampleAt = watchSample.date;
             console.log(newDoc);
-            collection.updateOne({'userId': userId}, { $set: newDoc } 
+            collection.updateOne({'userId': watchSample.userId}, { $set: newDoc } 
             , (err, result) => {
                 console.log('err', err);
                 console.log('result', result);
-                console.log("Updated the document with the field a equal to "+userId);
+                console.log("Updated the document with the field a equal to "+watchSample.userId);
                 client.close();
               }); 
             
 
         });
     });
-
+export function getUsers(): Observable<{ userId: string }[]> {
+  return of([]);
 }
 
-export function getProfileStatistics(): Observable<IPersonStatistics> {
-    
+export function getProfileStatistics(userId: string): Observable<IPersonStatistics> {
     return of(defaultJson);
 }
 
