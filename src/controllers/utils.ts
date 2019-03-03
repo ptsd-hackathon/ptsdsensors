@@ -1,3 +1,3 @@
 export function randomBetween(from: number, to: number) {
-    return Math.floor(Math.random() * to) + from;
+  return Math.floor(Math.random() * to) + from;
 }

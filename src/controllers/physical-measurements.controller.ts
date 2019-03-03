@@ -6,23 +6,23 @@ import { IRisk } from '@models/risk.model';
 import { IPersonStatistics } from '@models/statistics.model';
 
 interface PhysicalMeasurementsRequest extends Request {
-    body: IUser
+  body: IUser;
 }
 
 const router: Router = Router();
 
 router.post('/:userId', (req: PhysicalMeasurementsRequest, res: Response) => {
-    getProfileStatistics(req.params.userId).subscribe(profileStatistics => {
-        const response: IRisk = calculateRisk(req.body, profileStatistics);
-        res.json(response);
-    });
+  getProfileStatistics(req.params.userId).subscribe(profileStatistics => {
+    const response: IRisk = calculateRisk(req.body, profileStatistics);
+    res.json(response);
+  });
 });
 
 function calculateRisk(user: IUser, statistics: IPersonStatistics): IRisk {
-    return {
-        totalRiskGrade: 0.4,
-        measurements: []
-    };
+  return {
+    totalRiskGrade: 0.4,
+    measurements: [],
+  };
 }
 
 export const PhysicalMeasurementsController: Router = router;
