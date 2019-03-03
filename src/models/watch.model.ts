@@ -1,7 +1,6 @@
-interface IWatchStatisticsSample {
+export interface IWatchStatisticsSample {
     date: Date;
     calories: number;
-    movement: number;
     respiratoryRate: number;
     spO2: number;
     heartRate: number;

@@ -1,4 +1,4 @@
-interface IRisk {
+export interface IRisk {
     totalRiskGrade: number;
     measurements: IMeasurement[];
 }
