@@ -1,20 +1,21 @@
 class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculator{
 
-  constructor(aberrantLevel: number) {
-    super(aberrantLevel);
-  }
-  protected redRange :Range = {low: 141, high: 190};
-  protected yellowRange :Range = {low: 121, high: 140};
-  protected greenRange :Range = {low: 90, high: 120};
+  public systolicBPMRangeScale: RangeScale;
 
-  public getGradeInScale(statistic: IPersonStatistic): number{
-    this.isAberrantPersonalAverage(statistic);
-    return MeasurmentScale.GREEN;
+  constructor() {
+    super();
+    this.systolicBPMRangeScale = {redRange: {low: 141, high: 190},
+                                  yellowRange: {low: 121, high: 140},
+                                  greenRange: {low: 90, high: 120}};
   }
 
   calcRisk(): number {
-    return 0;
+    let risk =  this.calcAberrantPersonalAverage() + this.calcAberrantGeneralAverage(this.systolicBPMRangeScale);
+
+    if (risk > 1) {
+      return 1;
+    }
+
+    return risk;
   }
-
-
 }
