@@ -1,12 +1,12 @@
-import { timer, Observable, of } from "rxjs";
-import { flatMap, delay } from 'rxjs/operators';
+import { Observable, of, interval } from "rxjs";
+import { flatMap, delay, tap } from 'rxjs/operators';
 import { randomBetween } from "./utils";
 
 import { IWatchStatisticsSample } from "../models/watch.model";
 import { getUsers, updatePersonAvg } from "./mongodb.controller";
 
 export function initDataRetriever(intervalTime: number): void {
-    timer(intervalTime, 0).pipe(
+    interval(intervalTime).pipe(
         flatMap(() => getUsers()),
         flatMap(users => getWatchStatistics(users))
     ).subscribe(

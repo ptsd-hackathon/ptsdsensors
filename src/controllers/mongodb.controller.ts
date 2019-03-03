@@ -1,29 +1,31 @@
 
 import { MongoClient, Db } from 'mongodb';
 import * as assert from 'assert';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 
 import { IPersonStatistics } from '@models/statistics.model';
 import { IWatchStatisticsSample } from '@models/watch.model';
-
 const defaultJson: IPersonStatistics = {
+    userId: "",
     count: 0,
     lastSampleAt: new Date(),
-    calories: { min: 0, max: 10, average: 5, lastSample: 7 },
-    respiratoryRate: { min: 0, max: 10, average: 5, lastSample: 7 },
-    spO2: { min: 0, max: 10, average: 5, lastSample: 7 },
-    heartRate: { min: 0, max: 10, average: 5, lastSample: 7 },
-    hrVariability: { min: 0, max: 10, average: 5, lastSample: 7 },
-    systolicBP: { min: 0, max: 10, average: 5, lastSample: 7 },
-    diastolicBP: { min: 0, max: 10, average: 5, lastSample: 7 },
-    pulsePressure: { min: 0, max: 10, average: 5, lastSample: 7 },
-    strokeVolume: { min: 0, max: 10, average: 5, lastSample: 7 },
-    cardiacOutput: { min: 0, max: 10, average: 5, lastSample: 7 },
-    cardiacIndex: { min: 0, max: 10, average: 5, lastSample: 7 },
-    svr: { min: 0, max: 10, average: 5, lastSample: 7 },
-    temperature: { min: 0, max: 10, average: 5, lastSample: 7 },
-    sweat: { min: 0, max: 10, average: 5, lastSample: 7 }
+    calories: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    respiratoryRate: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    spO2: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    heartRate: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    hrVariability: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    systolicBP: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    diastolicBP: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    pulsePressure: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    strokeVolume: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    cardiacOutput: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    cardiacIndex: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    svr: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    temperature: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 },
+    sweat: { min: Infinity, max: -Infinity, average: 5, lastSample: 7 }
 }
+
+
 
 export function createNewUser(newUserId: String) {
      const url = 'mongodb://localhost:27017';
@@ -37,10 +39,13 @@ export function createNewUser(newUserId: String) {
      // Insert some documents
      collection.insertMany([
         myuser
-     ]);
+     ],(err,result)=>{
+         console.log('inserted: ',result);
+         client.close();
+
+     });
  
   
-     client.close();
      });
  
 }
@@ -48,10 +53,58 @@ export function createNewUser(newUserId: String) {
 
 export function initDB() {
 }
-export function updatePersonAvg(stats: IWatchStatisticsSample) {
+export function updatePersonAvg(watchSample: IWatchStatisticsSample) {
+    console.log('update person');
+    const url = 'mongodb://localhost:27017';
+     const dbName = 'myproject';
+
+     MongoClient.connect(url, function(err, client) {
+     
+        const db: Db = client.db(dbName);
+        const collection = db.collection('documents');
+        
+        // Find some 
+        collection.find({'userId': watchSample.userId}).toArray((err, docs: IPersonStatistics[]) => {
+            const statDocument: IPersonStatistics = docs[0];
+            const newDoc = {...statDocument};
+
+            const toOmit = ['userId', 'count', 'lastSampleAt'];
+            Object.keys(statDocument).filter(prop => toOmit.indexOf(prop) === -1).forEach(prop => {
+                newDoc[prop].average = (statDocument.count*statDocument[prop].average+watchSample[prop]) / (statDocument.count+1);
+                newDoc[prop].max = Math.max(statDocument[prop].max, watchSample[prop]);
+                newDoc[prop].min = Math.min(statDocument[prop].min, watchSample[prop]);
+                newDoc[prop].lastSample = watchSample[prop];
+            });
+            newDoc.count = statDocument.count+1;
+            newDoc.lastSampleAt = watchSample.date;
+            collection.updateOne({'userId': watchSample.userId}, { $set: newDoc } 
+            , (err, result) => {
+                console.log('err', err);
+                console.log("Updated the document with the field a equal to "+watchSample.userId);
+                client.close();
+              }); 
+            
+
+        });
+    });
 }
+
 export function getUsers(): Observable<{ userId: string }[]> {
-  return of([]);
+  
+  const url = 'mongodb://localhost:27017';
+  const dbName = 'myproject';
+
+  return Observable.create((observer) => {
+    MongoClient.connect(url, function(err, client) {
+    
+       const db: Db = client.db(dbName);
+       const collection = db.collection('documents');
+       collection.find({}).project({ userId: 1 }).toArray().then(users => {
+         observer.next(users);
+         client.close();
+       });
+    });
+  })
 }
 
 export function getProfileStatistics(userId: string): Observable<IPersonStatistics> {
