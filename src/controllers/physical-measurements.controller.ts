@@ -5,13 +5,13 @@ import { IUser } from '@models/user.model';
 import { IRisk } from '@models/risk.model';
 import { IPersonStatistics } from '@models/statistics.model';
 
-interface BasicRequest extends Request {
+interface PhysicalMeasurementsRequest extends Request {
     body: IUser
 }
 
 const router: Router = Router();
 
-router.post('/', (req: BasicRequest, res: Response) => {
+router.post('/', (req: PhysicalMeasurementsRequest, res: Response) => {
     getProfileStatistics().subscribe(profileStatistics => {
         const response: IRisk = calculateRisk(req.body, profileStatistics);
         res.json(response);

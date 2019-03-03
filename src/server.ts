@@ -12,6 +12,7 @@ createNewUser("roman");
 initDataRetriever(Number(process.env.WATCH_UPDATE_INTERVAL) || 4000);
 
 app.use('/physical-measurements', PhysicalMeasurementsController);
+app.use('/users', UsersController);
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/`);
