@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 
 import { IUser } from '@models/user.model';
+import { createNewUser } from './mongodb.controller';
 
 interface UserCreationRequest extends Request {
     body: IUser
@@ -9,9 +10,8 @@ interface UserCreationRequest extends Request {
 const router: Router = Router();
 
 router.post('/', (req: UserCreationRequest, res: Response) => {
-    // createNewUser(req.body.id).subscribe(() => {
-    //     res.send('OK');
-    // });
+    res.send('OK');
+    createNewUser(req.body.id);
 });
 
 export const UsersController: Router = router;
