@@ -1,4 +1,4 @@
-abstract class MeasurementRiskCalculator {
+export abstract class MeasurementRiskCalculator {
 
   readonly GREEN_RISK_LEVEL = 0;
   readonly YELLOW_RISK_LEVEL = 0.2;

@@ -1,4 +1,6 @@
-class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculator{
+import { MeasurementRiskCalculator } from "@models/MeasurementRiskCalculator";
+
+export class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculator{
 
   public systolicBPMRangeScale: RangeScale;
 
