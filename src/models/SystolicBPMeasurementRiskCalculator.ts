@@ -1,4 +1,4 @@
-import { MeasurementRiskCalculator } from "@models/MeasurementRiskCalculator";
+import { MeasurementRiskCalculator } from "./MeasurementRiskCalculator";
 
 export class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculator{
 
@@ -6,13 +6,13 @@ export class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculat
 
   constructor() {
     super();
-    this.systolicBPMRangeScale = {redRange: {low: 141, high: 190},
-                                  yellowRange: {low: 121, high: 140},
-                                  greenRange: {low: 90, high: 120}};
+    this.systolicBPMRangeScale = {greenRange: {low: 90, high: 120},
+                                  redRange: {low: 141, high: 190},
+                                  yellowRange: {low: 121, high: 140}};
   }
 
-  calcRisk(): number {
-    let risk =  this.calcAberrantPersonalAverage() + this.calcAberrantGeneralAverage(this.systolicBPMRangeScale);
+  public calcRisk(): number {
+    const risk =  this.calcAberrantPersonalAverage() + this.calcAberrantGeneralAverage(this.systolicBPMRangeScale);
 
     if (risk > 1) {
       return 1;

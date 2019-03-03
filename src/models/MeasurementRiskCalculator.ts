@@ -1,31 +1,32 @@
-export abstract class MeasurementRiskCalculator {
+import {IPersonStatistic} from "../../lib/models/statistics.model";
 
-  readonly GREEN_RISK_LEVEL = 0;
-  readonly YELLOW_RISK_LEVEL = 0.2;
-  readonly PERSONAL_LIMIT_PASS_RISK = 0.5;
+export abstract class MeasurementRiskCalculator {
 
   public risk: number = 0;
   public statistic: IPersonStatistic;
 
-  constructor() {
+  protected readonly GREEN_RISK_LEVEL = 0;
+  protected readonly YELLOW_RISK_LEVEL = 0.2;
+  protected readonly PERSONAL_LIMIT_PASS_RISK = 0.5;
+
+  protected constructor() {
     this.statistic = {min: 0, max: 0, average: 0, lastSample: 0};
   }
 
-
   public calcAberrantPersonalAverage(): number {
-    let lastSample = this.statistic.lastSample;
+    const lastSample = this.statistic.lastSample;
 
     if (lastSample > this.statistic.max || lastSample < this.statistic.min) {
       return this.PERSONAL_LIMIT_PASS_RISK;
     }
 
-    let greaterDeviation = Math.max(Math.abs(lastSample - this.statistic.max), Math.abs(lastSample - this.statistic.min));
+    const greaterDeviation = Math.max(Math.abs(lastSample - this.statistic.max), Math.abs(lastSample - this.statistic.min));
     return Math.abs(lastSample - this.statistic.average) / greaterDeviation;
   }
 
   public calcAberrantGeneralAverage(rangeScale: RangeScale): number {
 
-    let lastSample = this.statistic.lastSample;
+    const lastSample = this.statistic.lastSample;
 
     if (lastSample >= rangeScale.greenRange.low && lastSample <= rangeScale.greenRange.high) {
       return this.GREEN_RISK_LEVEL;
