@@ -1,7 +1,6 @@
-interface IPersonStatistics {
+export interface IPersonStatistics {
     lastSampleAt: Date;
     calories: IPersonStatistic;
-    movement: IPersonStatistic;
     respiratoryRate: IPersonStatistic;
     spO2: IPersonStatistic;
     heartRate: IPersonStatistic;
