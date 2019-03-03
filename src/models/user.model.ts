@@ -1,12 +1,12 @@
 export interface IUser {
-    id: string;
+    email: string;
     profile: IUserProfile;
 }
 
 export interface IUserProfile {
     gender: Gender;
-    dateOfBirth: CustomDate;
-    initialPanicAttackDate: CustomDate;
+    dateOfBirth: Date;
+    initialPanicAttackDate: Date;
     sleep: SleepingHours;
     isShabbatKeeper: boolean;
     isSmoking: boolean;
@@ -37,13 +37,7 @@ interface FamilyStatus {
     numberOfChildren: number;
 }
 
-interface CustomDate {
-    day: string;
-    month: string;
-    year: string;
-}
-
 interface SleepingHours {
-    bedHour: number
+    bedHour: number;
     wakingHour: number
 }
