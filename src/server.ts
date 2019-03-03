@@ -3,6 +3,7 @@ import * as express from 'express';
 import { PhysicalMeasurementsController } from './controllers/physical-measurements.controller';
 import { initDB } from './controllers/mongodb.controller';
 import { initDataRetriever } from './controllers/watch.controller';
+import { UsersController } from './controllers/users.controller';
 
 const app: express.Application = express();
 const port: number = Number(process.env.PORT) || 3000;
