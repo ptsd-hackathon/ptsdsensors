@@ -24,17 +24,18 @@ export function getWatchStatistics(users: { userId: string }[]): Observable<IWat
         date: new Date(),
         calories: randomBetween(23, 63),
         respiratoryRate: randomBetween(10, 20),
-        spO2: randomBetween(1, 10),
-        heartRate: randomBetween(1, 10),
-        hrVariability: randomBetween(1, 10),
-        systolicBP: randomBetween(1, 10),
-        diastolicBP: randomBetween(1, 10),
-        pulsePressure: randomBetween(1, 10),
-        strokeVolume: randomBetween(1, 10),
-        cardiacOutput: randomBetween(1, 10),
-        cardiacIndex: randomBetween(1, 10),
-        svrTemperature: randomBetween(1, 10),
-        sweat: randomBetween(1, 10)
+        spO2: randomBetween(80, 110),
+        heartRate: randomBetween(70, 90),
+        hrVariability: randomBetween(1, 12),
+        systolicBP: randomBetween(120, 135),
+        diastolicBP: randomBetween(80, 90),
+        pulsePressure: randomBetween(40, 50),
+        strokeVolume: randomBetween(75, 90),
+        cardiacOutput: randomBetween(5, 10),
+        cardiacIndex: randomBetween(3, 7),
+        svr: randomBetween(900, 1100),
+        temperature: randomBetween(35, 43),
+        sweat: randomBetween(1, 2)
     }))).pipe(
         delay(300)
     );

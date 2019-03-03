@@ -13,7 +13,8 @@ export interface IPersonStatistics {
     strokeVolume: IPersonStatistic;
     cardiacOutput: IPersonStatistic;
     cardiacIndex: IPersonStatistic;
-    svrTemperature: IPersonStatistic;
+    svr: IPersonStatistic;
+    temperature: IPersonStatistic;
     sweat: IPersonStatistic;
 }
 

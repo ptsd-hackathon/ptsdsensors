@@ -20,7 +20,8 @@ const defaultJson: IPersonStatistics = {
     strokeVolume: { min: 0, max: 10, average: 5, lastSample: 7 },
     cardiacOutput: { min: 0, max: 10, average: 5, lastSample: 7 },
     cardiacIndex: { min: 0, max: 10, average: 5, lastSample: 7 },
-    svrTemperature: { min: 0, max: 10, average: 5, lastSample: 7 },
+    svr: { min: 0, max: 10, average: 5, lastSample: 7 },
+    temperature: { min: 0, max: 10, average: 5, lastSample: 7 },
     sweat: { min: 0, max: 10, average: 5, lastSample: 7 }
 }
 

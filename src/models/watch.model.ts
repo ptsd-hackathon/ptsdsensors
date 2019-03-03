@@ -12,6 +12,7 @@ export interface IWatchStatisticsSample {
     strokeVolume: number;
     cardiacOutput: number;
     cardiacIndex: number;
-    svrTemperature: number;
+    svr: number;
+    temperature: number;
     sweat: number;
 }
