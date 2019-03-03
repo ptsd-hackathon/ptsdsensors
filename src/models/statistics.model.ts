@@ -1,6 +1,7 @@
 interface IPersonStatistics {
     lastSampleAt: Date;
-    caloriesMovement: IPersonStatistic;
+    calories: IPersonStatistic;
+    movement: IPersonStatistic;
     respiratoryRate: IPersonStatistic;
     spO2: IPersonStatistic;
     heartRate: IPersonStatistic;
@@ -12,7 +13,7 @@ interface IPersonStatistics {
     cardiacOutput: IPersonStatistic;
     cardiacIndex: IPersonStatistic;
     svrTemperature: IPersonStatistic;
-    Sweat: IPersonStatistic;
+    sweat: IPersonStatistic;
 }
 
 interface IPersonStatistic {
