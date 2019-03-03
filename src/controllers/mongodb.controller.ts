@@ -4,7 +4,8 @@ import * as assert from 'assert';
 import { Observable, of } from 'rxjs';
 
 import { IPersonStatistics } from '@models/statistics.model';
-//JSON.stringify(object)
+import { IWatchStatisticsSample } from '@models/watch.model';
+
 const defaultJson: IPersonStatistics = {
     count: 0,
     lastSampleAt: new Date(),
@@ -46,11 +47,13 @@ export function createNewUser(newUserId: String) {
 
 export function initDB() {
 }
-export function updatePersonAvg(per: IPersonStatistics) {
+export function updatePersonAvg(stats: IWatchStatisticsSample) {
+}
+export function getUsers(): Observable<{ userId: string }[]> {
+  return of([]);
 }
 
-export function getProfileStatistics(): Observable<IPersonStatistics> {
-    
+export function getProfileStatistics(userId: string): Observable<IPersonStatistics> {
     return of(defaultJson);
 }
 
