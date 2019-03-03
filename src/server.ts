@@ -28,9 +28,9 @@ const defaultWatch = {
 }
 
 initDB();
-//createNewUser("roman7");
-updatePersonAvg(defaultWatch);
-initDataRetriever(Number(process.env.WATCH_UPDATE_INTERVAL) || 4000);
+// createNewUser("roman7");
+// updatePersonAvg(defaultWatch);
+initDataRetriever(4000);
 
 app.use('/physical-measurements', PhysicalMeasurementsController);
 app.use('/users', UsersController);
