@@ -119,10 +119,9 @@ export function getProfileStatistics(
       const db: Db = client.db(dbName);
       const collection = db.collection('documents');
       collection
-        .find({'userId': userId})
-        .toArray()
-        .then(users => {
-          observer.next(users);
+        .findOne({'userId': userId})
+        .then(stats => {
+          observer.next(stats);
           client.close();
         });
     });

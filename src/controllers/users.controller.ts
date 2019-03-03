@@ -9,9 +9,15 @@ interface UserCreationRequest extends Request {
 const router: Router = Router();
 
 router.post('/', (req: UserCreationRequest, res: Response) => {
-  res.send('OK');
   console.log(`create user ${req.body.userId}`);
+  
+  if (!req.body || !req.body.userId) {
+    res.status(500).send('Missing userId');
+    return;
+  }
+  
   createNewUser(req.body.userId);
+  res.send('OK');
 });
 
 export const UsersController: Router = router;

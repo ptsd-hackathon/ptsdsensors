@@ -19,6 +19,7 @@ router.post('/:userId', (req: PhysicalMeasurementsRequest, res: Response) => {
 });
 
 function calculateRisk(user: IUser, statistics: IPersonStatistics): IRisk {
+  console.log(user, statistics);
   return {
     totalRiskGrade: 0.4,
     measurements: [],
