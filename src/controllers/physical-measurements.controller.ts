@@ -1,7 +1,9 @@
 import { Router, Request, Response } from 'express';
 
+import { getProfileStatistics } from './mongodb.controller';
 import { IUser } from '@models/user.model';
-import { getProfileStatistics } from './mongodb';
+import { IRisk } from '@models/risk.model';
+import { IPersonStatistics } from '@models/statistics.model';
 
 interface BasicRequest extends Request {
     body: IUser

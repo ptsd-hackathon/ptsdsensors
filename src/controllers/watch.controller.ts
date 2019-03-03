@@ -2,6 +2,8 @@ import { timer, Observable, of } from "rxjs";
 import { flatMap, delay } from 'rxjs/operators';
 import { randomBetween } from "./utils";
 
+import { IWatchStatisticsSample } from "../models/watch.model";
+
 export function initDataRetriever(intervalTime: number): void {
     timer(intervalTime, 0).pipe(
         flatMap(() => getWatchStatistics())
@@ -14,7 +16,6 @@ export function getWatchStatistics(): Observable<IWatchStatisticsSample> {
     return of({
         date: new Date(),
         calories: randomBetween(23, 63),
-        movement: randomBetween(54, 70),
         respiratoryRate: randomBetween(1, 10),
         spO2: randomBetween(1, 10),
         heartRate: randomBetween(1, 10),
