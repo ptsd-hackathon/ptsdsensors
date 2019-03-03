@@ -1,4 +1,6 @@
 export interface IPersonStatistics {
+    userId?: String;
+    count: number;
     lastSampleAt: Date;
     calories: IPersonStatistic;
     respiratoryRate: IPersonStatistic;
