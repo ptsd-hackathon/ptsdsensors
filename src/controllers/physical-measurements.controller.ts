@@ -11,8 +11,8 @@ interface PhysicalMeasurementsRequest extends Request {
 
 const router: Router = Router();
 
-router.post('/:userId', (req: PhysicalMeasurementsRequest, res: Response) => {
-  getProfileStatistics(req.params.userId).subscribe(profileStatistics => {
+router.post('/', (req: PhysicalMeasurementsRequest, res: Response) => {
+  getProfileStatistics(req.body.userId).subscribe(profileStatistics => {
     const response: IRisk = calculateRisk(req.body, profileStatistics);
     res.json(response);
   });
