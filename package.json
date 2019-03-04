@@ -30,8 +30,10 @@
     "watch:test": "jest --watch"
   },
   "dependencies": {
+    "@types/mongodb": "^3.1.20",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "graph-data-structure": "^1.8.0",
+    "mongodb": "^3.1.13",
     "rxjs": "^6.4.0"
   },
   "devDependencies": {

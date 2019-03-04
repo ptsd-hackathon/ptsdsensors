@@ -1,49 +1,43 @@
 export interface IUser {
-    id: string;
-    profile: IUserProfile;
+  userId: string;
+  profile: IUserProfile;
 }
 
 export interface IUserProfile {
-    gender: Gender;
-    dateOfBirth: CustomDate;
-    initialPanicAttackDate: CustomDate;
-    sleep: SleepingHours;
-    isShabbatKeeper: boolean;
-    isSmoking: boolean;
-    familyStatus: FamilyStatus;
-    traumaType: TraumaType;
-    medicalInformation: MedicalInformation;
-    stressHours: number[];
-    stressfullPlaces: string[];
+  gender: Gender;
+  dateOfBirth: Date;
+  initialPanicAttackDate: Date;
+  sleep: SleepingHours;
+  isShabbatKeeper: boolean;
+  isSmoking: boolean;
+  familyStatus: FamilyStatus;
+  traumaType: TraumaType;
+  medicalInformation: MedicalInformation;
+  stressHours: number[];
+  stressfullPlaces: string[];
 }
 
 interface MedicalInformation {
-    isTaking: boolean;
-    drugs: string[]
+  isTaking: boolean;
+  drugs: string[];
 }
 
 enum Gender {
-    MALE,
-    FEMALE
+  MALE,
+  FEMALE,
 }
 
 enum TraumaType {
-    SEX_ASSAULT,
-    ARMY
+  SEX_ASSAULT,
+  ARMY,
 }
 
 interface FamilyStatus {
-    isMarried: boolean;
-    numberOfChildren: number;
-}
-
-interface CustomDate {
-    day: string;
-    month: string;
-    year: string;
+  isMarried: boolean;
+  numberOfChildren: number;
 }
 
 interface SleepingHours {
-    bedHour: number
-    wakingHour: number
+  bedHour: number;
+  wakingHour: number;
 }
