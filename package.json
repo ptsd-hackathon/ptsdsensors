@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "graph-data-structure": "^1.8.0",
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
@@ -38,7 +39,7 @@
     "@types/jest": "^23.3.3",
     "@types/node": "^10.11.4",
     "coveralls": "^3.0.2",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.3",
