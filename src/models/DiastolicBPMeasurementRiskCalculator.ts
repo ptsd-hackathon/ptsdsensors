@@ -22,6 +22,6 @@ export class DiastolicBPMeasurementRiskCalculator extends MeasurementRiskCalcula
   }
 
   public getMeasurementName() {
-    return "diastolic blood pressure";
+    return "diastolic blood pressure ";
   }
 }
