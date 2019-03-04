@@ -32,6 +32,7 @@ export class CombinedRiskCalculator {
     this.personStatistics = personStatistics;
     this.systolicBPCalculator = new SystolicBPMeasurementRiskCalculator();
     this.diastolicBPCalculator = new DiastolicBPMeasurementRiskCalculator();
+    this.updateStatistics(personStatistics);
   }
   
   public updateStatistics(personStatistics: IPersonStatistics){

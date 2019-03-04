@@ -4,7 +4,7 @@ import { from, Observable, of } from 'rxjs';
 
 import { IPersonStatistics } from '../models/statistics.model';
 import { IWatchStatisticsSample } from '../models/watch.model';
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://129.213.109.100:27017';
 const dbName = 'myproject';
 
 const defaultJson: IPersonStatistics = {
