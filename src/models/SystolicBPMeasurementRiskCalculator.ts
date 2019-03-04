@@ -23,6 +23,6 @@ export class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculat
   }
 
   public getMeasurementName() {
-    return "systolic blood pressure";
+    return "Systolic blood pressure";
   }
 }

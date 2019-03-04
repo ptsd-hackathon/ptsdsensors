@@ -35,7 +35,6 @@ export function createNewUser(newUserId: String) {
     const myuser = { ...defaultJson, userId: newUserId };
     // Insert some documents
     collection.insertMany([myuser], (err, result) => {
-      console.log('inserted: ', result);
       client.close();
     });
   });
@@ -43,8 +42,6 @@ export function createNewUser(newUserId: String) {
 
 export function initDB() {}
 export function updatePersonAvg(watchSample: IWatchStatisticsSample) {
-  console.log('update person');
-
   MongoClient.connect(url, function(err, client) {
     const db: Db = client.db(dbName);
     const collection = db.collection('documents');
@@ -80,7 +77,6 @@ export function updatePersonAvg(watchSample: IWatchStatisticsSample) {
           { userId: watchSample.userId },
           { $set: newDoc },
           (err, result) => {
-            console.log('err', err);
             console.log(
               'Updated the document with the field a equal to ' +
               watchSample.userId
@@ -175,8 +171,6 @@ const findDocuments = function(db: Db, callback) {
   // Find some documents
   collection.find({ a: 2 }).toArray(function(err, docs) {
     assert.equal(err, null);
-    console.log('Found the following records');
-    console.log(docs);
     callback(docs);
   });
 };
