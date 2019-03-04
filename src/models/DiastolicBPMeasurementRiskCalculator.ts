@@ -1,14 +1,14 @@
 import { MeasurementRiskCalculator } from "@models/MeasurementRiskCalculator";
 
-export class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculator{
+export class DiastolicBPMeasurementRiskCalculator extends MeasurementRiskCalculator{
 
   public systolicBPMRangeScale: RangeScale;
 
   constructor() {
     super();
-    this.systolicBPMRangeScale = {redRange: {low: 141, high: 190},
-                                  yellowRange: {low: 121, high: 140},
-                                  greenRange: {low: 90, high: 120}};
+    this.systolicBPMRangeScale = {redRange: {low: 90, high: 100},
+                                  yellowRange: {low: 80, high: 89},
+                                  greenRange: {low: 60, high: 79}};
   }
 
   calcRisk(): number {
@@ -22,6 +22,6 @@ export class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculat
   }
 
   public getMeasurementName() {
-    return "systolic blood pressure";
+    return "diastolic blood pressure";
   }
 }
