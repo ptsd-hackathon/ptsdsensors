@@ -1,9 +1,9 @@
-type Range = {
+export type Range = {
   low: number,
   high: number;
 }
 
-type RangeScale = {
+export type RangeScale = {
   redRange: Range,
   yellowRange: Range,
   greenRange: Range;

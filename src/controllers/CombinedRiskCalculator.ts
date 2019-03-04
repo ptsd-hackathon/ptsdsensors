@@ -1,4 +1,4 @@
-import {DiastolicBPMeasurementRiskCalculator} from "@models/DiastolicBPMeasurementRiskCalculator";
+import {DiastolicBPMeasurementRiskCalculator} from "../models/DiastolicBPMeasurementRiskCalculator";
 import {ICombinedRisk} from "../models/ICombinedRisk";
 import {MeasurementRiskCalculator} from "../models/MeasurementRiskCalculator";
 import {IMeasurement, IRisk} from "../models/risk.model";

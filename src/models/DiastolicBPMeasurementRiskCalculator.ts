@@ -1,4 +1,5 @@
-import { MeasurementRiskCalculator } from "@models/MeasurementRiskCalculator";
+import { MeasurementRiskCalculator } from "./MeasurementRiskCalculator";
+import {RangeScale} from "./range.model";
 
 export class DiastolicBPMeasurementRiskCalculator extends MeasurementRiskCalculator{
 
