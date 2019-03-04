@@ -1,3 +1,5 @@
+import { HeartRateMeasurmentRiskCalculator } from "@models/HeartRateMeasurmentRiskCalculator";
+import { HeartRateVariabilityMeasurementRiskCalculator } from "@models/HeartRateVariabilityMeasurementRiskCalculator";
 import {DiastolicBPMeasurementRiskCalculator} from "../models/DiastolicBPMeasurementRiskCalculator";
 import {ICombinedRisk} from "../models/ICombinedRisk";
 import {MeasurementRiskCalculator} from "../models/MeasurementRiskCalculator";
@@ -27,11 +29,15 @@ export class CombinedRiskCalculator {
   public personStatistics: IPersonStatistics;
   private readonly systolicBPCalculator: SystolicBPMeasurementRiskCalculator;
   private readonly diastolicBPCalculator: DiastolicBPMeasurementRiskCalculator;
+  private readonly heartRateCalculator: HeartRateMeasurmentRiskCalculator;
+  private readonly heartRateVariabilityCalculator: HeartRateVariabilityMeasurementRiskCalculator;
 
   public constructor(personStatistics: IPersonStatistics){
     this.personStatistics = personStatistics;
     this.systolicBPCalculator = new SystolicBPMeasurementRiskCalculator();
     this.diastolicBPCalculator = new DiastolicBPMeasurementRiskCalculator();
+    this.heartRateCalculator = new HeartRateMeasurmentRiskCalculator();
+    this.heartRateVariabilityCalculator = new HeartRateVariabilityMeasurementRiskCalculator();
     this.updateStatistics(personStatistics);
   }
   
@@ -39,6 +45,8 @@ export class CombinedRiskCalculator {
     this.personStatistics = personStatistics;
     this.systolicBPCalculator.updateSatistics(personStatistics.systolicBP);
     this.diastolicBPCalculator.updateSatistics(personStatistics.diastolicBP);
+    this.heartRateCalculator.updateSatistics(personStatistics.heartRate);
+    this.heartRateVariabilityCalculator.updateSatistics(personStatistics.hrVariability);
   }
 
   public calculateCombinedRisk(personStatistics: IPersonStatistics): IRisk
@@ -51,7 +59,7 @@ export class CombinedRiskCalculator {
   private getRisksList(): ICombinedRisk[]{
     const allRisks: ICombinedRisk[] = [];
 
-    allRisks.push(CombinedRiskCalculator.getCombinedRisk([this.systolicBPCalculator, this.diastolicBPCalculator], 1));
+    allRisks.push(CombinedRiskCalculator.getCombinedRisk([this.systolicBPCalculator, this.diastolicBPCalculator, this.heartRateCalculator, this.heartRateVariabilityCalculator], 1));
 
     return allRisks;
   }
