@@ -1,9 +1,9 @@
-import { MongoClient, Db } from 'mongodb';
 import * as assert from 'assert';
-import { Observable, of, from } from 'rxjs';
+import { Db, MongoClient } from 'mongodb';
+import { from, Observable, of } from 'rxjs';
 
-import { IPersonStatistics } from '@models/statistics.model';
-import { IWatchStatisticsSample } from '@models/watch.model';
+import { IPersonStatistics } from '../models/statistics.model';
+import { IWatchStatisticsSample } from '../models/watch.model';
 const url = 'mongodb://localhost:27017';
 const dbName = 'myproject';
 
@@ -83,7 +83,7 @@ export function updatePersonAvg(watchSample: IWatchStatisticsSample) {
             console.log('err', err);
             console.log(
               'Updated the document with the field a equal to ' +
-                watchSample.userId
+              watchSample.userId
             );
             client.close();
           }
@@ -113,7 +113,7 @@ export function getUsers(): Observable<{ userId: string }[]> {
 export function getProfileStatistics(
   userId: string
 ): Observable<IPersonStatistics> {
-  
+
   return Observable.create(observer => {
     MongoClient.connect(url, function(err, client) {
       const db: Db = client.db(dbName);

@@ -3,7 +3,7 @@ export interface IRisk {
   measurements: IMeasurement[];
 }
 
-interface IMeasurement {
+export interface IMeasurement {
   name: string;
   value: number;
   riskGrade: number;
