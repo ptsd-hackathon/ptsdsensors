@@ -1,5 +1,5 @@
-import { MeasurementRiskCalculator } from "@models/MeasurementRiskCalculator";
-import { RangeScale } from "@models/range.model";
+import { MeasurementRiskCalculator } from "../models/MeasurementRiskCalculator";
+import { RangeScale } from "../models/range.model";
 
 export class HeartRateVariabilityMeasurementRiskCalculator extends MeasurementRiskCalculator {
 

@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { IUser } from '@models/user.model';
+import { IUser } from '../models/user.model';
 import { createNewUser } from './mongodb.controller';
 
 interface UserCreationRequest extends Request {

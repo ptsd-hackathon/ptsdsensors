@@ -1,5 +1,5 @@
-import { HeartRateMeasurmentRiskCalculator } from "@models/HeartRateMeasurmentRiskCalculator";
-import { HeartRateVariabilityMeasurementRiskCalculator } from "@models/HeartRateVariabilityMeasurementRiskCalculator";
+import { HeartRateMeasurmentRiskCalculator } from "../models/HeartRateMeasurmentRiskCalculator";
+import { HeartRateVariabilityMeasurementRiskCalculator } from "../models/HeartRateVariabilityMeasurementRiskCalculator";
 import {DiastolicBPMeasurementRiskCalculator} from "../models/DiastolicBPMeasurementRiskCalculator";
 import {ICombinedRisk} from "../models/ICombinedRisk";
 import {MeasurementRiskCalculator} from "../models/MeasurementRiskCalculator";
