@@ -1,5 +1,5 @@
-import {IPersonStatistic} from "../../lib/models/statistics.model";
 import {RangeScale} from "./range.model";
+import { IPersonStatistic } from "./statistics.model";
 
 export abstract class MeasurementRiskCalculator {
 

@@ -18,7 +18,7 @@ export interface IPersonStatistics {
   sweat: IPersonStatistic;
 }
 
-interface IPersonStatistic {
+export interface IPersonStatistic {
   min: number;
   max: number;
   average: number;
