@@ -30,11 +30,9 @@ export abstract class MeasurementRiskCalculator {
 
     if (lastSample >= rangeScale.greenRange.low && lastSample <= rangeScale.greenRange.high) {
       return this.GREEN_RISK_LEVEL;
-    }
-    else if(lastSample > rangeScale.yellowRange.low && lastSample <= rangeScale.yellowRange.high) {
+    } else if (lastSample > rangeScale.yellowRange.low && lastSample <= rangeScale.yellowRange.high) {
       return this.YELLOW_RISK_LEVEL;
-    }
-    else {
+    } else {
       return this.calcRedRisk(lastSample, rangeScale);
     }
   }
@@ -43,10 +41,13 @@ export abstract class MeasurementRiskCalculator {
     return Math.abs(lastSample - rangeScale.greenRange.high) * 0.01;
   }
 
-  public abstract calcRisk() : number;
+  public abstract calcRisk(): number;
 
   public updateSatistics(newStatistic: IPersonStatistic) {
     this.statistic = newStatistic;
     this.risk = this.calcRisk();
   }
+
+  public abstract getMeasurementName(): string;
 }
+
