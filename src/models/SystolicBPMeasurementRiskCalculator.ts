@@ -20,4 +20,8 @@ export class SystolicBPMeasurementRiskCalculator extends MeasurementRiskCalculat
 
     return risk;
   }
+
+  public getMeasurementName() {
+    return "systolic blood pressure";
+  }
 }
